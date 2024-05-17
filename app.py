@@ -12,11 +12,17 @@ SERVICE_NAME = os.environ.get('SERVICE_NAME', 'application')
 def hello_user(user: str):
     return make_response(
         jsonify(
-            {'message': f'Hello from {SERVICE_NAME},{user}!'}
+            {'message': f'Hello from {SERVICE_NAME}, {user}!'}
         ),
         200
     )
 
 
 if __name__ == '__main__':
+    """
+    sudo docker container run -p5050:5000 flask_app:v0.1
+    -p5050:5000 - это аргумент принимает 2 числа разделеный :
+    5050 - порт для использования хоста для связи с портом внутри контейнера
+    5000 - на какой порт внутри контейнера перенаправлять запросы порта хоста
+    """
     APP.run(host=HOST, port=PORT)
